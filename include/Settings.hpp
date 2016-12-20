@@ -160,6 +160,7 @@ typedef struct thread_Settings {
     // shorts
     unsigned short mListenPort;     // -L
     unsigned short mPort;           // -p
+    unsigned short mSrcPort;           // -O
     // chars
     char   mFormat;                 // -f
     int mTTL;                    // -T

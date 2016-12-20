@@ -403,8 +403,9 @@ void Client::Connect( ) {
 
 
     SockAddr_localAddr( mSettings );
-    if ( mSettings->mLocalhost != NULL ) {
+    if ( (mSettings->mLocalhost != NULL) || (mSettings->mSrcPort != 0) ) {
         // bind socket to local address
+        SockAddr_setPort(&mSettings->local,mSettings->mSrcPort);
         rc = bind( mSettings->mSock, (sockaddr*) &mSettings->local, 
                    SockAddr_get_sizeof_sockaddr( &mSettings->local ) );
         WARN_errno( rc == SOCKET_ERROR, "bind" );

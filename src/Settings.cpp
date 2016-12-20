@@ -169,7 +169,7 @@ const struct option env_options[] =
 
 #define SHORT_OPTIONS()
 
-const char short_options[] = "1b:c:df:hi:l:mn:o:p:rst:uvw:x:y:B:CDF:IL:M:NP:RS:T:UVWZ:";
+const char short_options[] = "1b:c:df:hi:l:mn:o:p:rst:uvw:x:y:B:CDF:IL:M:NP:RS:T:UVWZ:O:";
 
 /* -------------------------------------------------------------------
  * defaults
@@ -208,6 +208,7 @@ void Settings_Initialize( thread_Settings *main ) {
     // mAmount is time also              // -n,  N/A
     //main->mOutputFileName = NULL;      // -o,  filename
     main->mPort         = 5001;          // -p,  ttcp port
+    main->mSrcPort      = 0;             // -O,  source port
     // mMode    = kTest_Normal;          // -r,  mMode == kTest_TradeOff
     main->mThreadMode   = kMode_Unknown; // -s,  or -c, none
     main->mAmount       = 1000;          // -t,  10 seconds
@@ -412,7 +413,8 @@ void Settings_Interpret( char option, const char *optarg, thread_Settings *mExtS
             }
 
             break;
-
+        case 'O' :
+			mExtSettings->mSrcPort = atoi( optarg );
         case 'm': // print TCP MSS
             setPrintMSS( mExtSettings );
             break;
